@@ -1,19 +1,20 @@
 
 from flask import Flask, render_template
 from healthcheck import HealthCheck
-
-from flask import Flask, render_template
 app = Flask(__name__)
+health= HealthCheck()
 
-@app.route('/projectserver/frontendproj')
+def wokringcheck():
+  return True, "Hello world"
+health.add_check( wokringcheck )
+
+@app.route('/')
 def mainpg():
   return render_template('frontendpage.html')
 
-@app.route('/projectserver/frontendproj/route')
-def my_link():
-
-
-  return 'Click.'
+@app.route('/healthcheck/')
+def healthcheck():
+  return health.run_check(wokringcheck)
 
 if __name__ == '__main__':
   app.run(debug=True)
