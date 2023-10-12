@@ -306,7 +306,7 @@ def custD():
   return render_template('customersD.html', data=data,pagination=pagination)
 @app.route('/reports/')
 def reports():
-  query="select  customer.first_name,customer.last_name,film.title, inventory.inventory_id, rental.rental_date, rental.return_date from sakila.inventory  inner join sakila.rental on inventory.inventory_id=rental.inventory_id inner join sakila.film on inventory.film_id=film.film_id inner join sakila.customer on rental.customer_id=customer.customer_id where return_date is not null;"
+  query="select  customer.first_name,customer.last_name,film.title, inventory.inventory_id, rental.rental_date, rental.return_date from sakila.inventory  inner join sakila.rental on inventory.inventory_id=rental.inventory_id inner join sakila.film on inventory.film_id=film.film_id inner join sakila.customer on rental.customer_id=customer.customer_id;"
   cursor.execute(query)
   data = cursor.fetchall()
   temp=render_template('pdf.html',data=data)
